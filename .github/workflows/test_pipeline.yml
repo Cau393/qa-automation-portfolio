@@ -35,6 +35,7 @@ jobs:
       - name: Run Pytest
         env:
           HEADLESS: true
+          PYTHONPATH: .
           TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
           TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
