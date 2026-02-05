@@ -38,7 +38,7 @@ jobs:
           TEST_USER_EMAIL: ${{ secrets.TEST_USER_EMAIL }}
           TEST_USER_PASSWORD: ${{ secrets.TEST_USER_PASSWORD }}
         run: |
-          pytest --headless=true --alluredir=allure-results
+          pytest --alluredir=allure-results
         continue-on-error: true
 
       # 6. Generate Allure Report
@@ -57,7 +57,16 @@ jobs:
           allure_results: allure-results
           allure_history: allure-history
           keep_reports: 20
+      
+      - name: Ensure Report Folder Exists (Fix for "src refspec" error)
+        if: always()
+        run: |
+          mkdir -p allure-history
+          if [ -z "$(ls -A allure-history)" ]; then
+             echo "<h1>Test Report Generating...</h1><p>If you see this, the tests ran but Allure didn't generate a report yet.</p>" > allure-history/index.html
+          fi
 
+      # 7. Deploy
       - name: Deploy Report to GitHub Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
@@ -65,4 +74,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          keep_files: true
           force_orphan: true
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
