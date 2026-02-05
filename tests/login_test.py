@@ -25,7 +25,7 @@ class TestLogin:
 
         try:
             WebDriverWait(driver, 10).until(
-                lambda d: d.current_url == "http://localhost:5003/" 
+                lambda d: d.current_url == "https://cdpipass.com.br/" 
             )
         except TimeoutException:
             print(f"[DEBUG] ⏳ Timed out! Still on: {driver.current_url}")
@@ -36,7 +36,7 @@ class TestLogin:
             except NoSuchElementException:
                 pass
                 
-        assert driver.current_url == "http://localhost:5003/", \
+        assert driver.current_url == "https://cdpipass.com.br/", \
             f"Login failed. Current URL: {driver.current_url}"
 
     @allure.severity(allure.severity_level.NORMAL)

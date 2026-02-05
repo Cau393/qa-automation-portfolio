@@ -1,6 +1,11 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import allure
+from os import getenv
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 class LoginPage(BasePage):
     EMAIL_INPUT = (By.CSS_SELECTOR, "[data-testid='input-email']")
@@ -18,7 +23,7 @@ class LoginPage(BasePage):
     
     def __init__(self, driver):
         super().__init__(driver)
-        self.url = "http://localhost:5003/login"
+        self.url = getenv("LOGIN_URL")
 
     @allure.step("Navigate to Login Page")
     def open(self):
