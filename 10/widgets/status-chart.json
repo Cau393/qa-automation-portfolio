@@ -1,0 +1,1 @@
+[{"uid":"187b493ff56bd569","name":"Successful Login with Valid Credentials","time":{"start":1770319796392,"stop":1770319796396,"duration":4},"status":"broken","severity":"critical"},{"uid":"3bc7ee7a24ce0634","name":"Fail Login with Invalid Email Format","time":{"start":1770319796810,"stop":1770319796817,"duration":7},"status":"broken","severity":"normal"}]
